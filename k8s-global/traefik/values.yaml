@@ -1,0 +1,39 @@
+service:
+  enabled: true
+  type: NodePort
+
+ports:
+  web:
+    # Traefik listens INSIDE the pod on :8000 (non-privileged)
+    port: 8000
+    expose:
+      default: true
+    # Expose to the cluster (Service) as 80
+    exposedPort: 80
+    # NodePort for external access
+    nodePort: 30080
+  websecure:
+    # Traefik listens INSIDE the pod on :8443 (non-privileged)
+    port: 8443
+    expose:
+      default: true
+    # Expose to the cluster (Service) as 443
+    exposedPort: 443
+    # NodePort for external access
+    nodePort: 30443
+  temporal-grpc:
+    # TCP port for Temporal gRPC
+    port: 7233
+    expose:
+      default: true
+    exposedPort: 7233
+    protocol: TCP
+    # NodePort for external access
+    nodePort: 30733
+
+ingressClass:
+  enabled: true
+  isDefaultClass: true
+
+api:
+  dashboard: true

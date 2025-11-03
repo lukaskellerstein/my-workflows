@@ -1,0 +1,19 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: prefect-server-subpath
+  namespace: prefect
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - match: PathPrefix(`/prefect-server`)
+      kind: Rule
+      # middlewares:
+      #   - name: prefect-redirect-slash
+      #   - name: prefect-strip-prefix
+      services:
+        - name: prefect-server
+          port: 4200
+          passHostHeader: true

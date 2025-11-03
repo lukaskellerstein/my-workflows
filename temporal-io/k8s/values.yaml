@@ -1,0 +1,31 @@
+# Temporal Helm Chart Values
+# Override default values for Temporal deployment
+
+# Server configuration
+server:
+  replicaCount: 1
+
+# Cassandra configuration
+cassandra:
+  config:
+    cluster_size: 1
+
+# Elasticsearch configuration
+elasticsearch:
+  replicas: 1
+
+# Enable monitoring
+prometheus:
+  enabled: true
+
+grafana:
+  enabled: true
+
+# Web UI configuration
+web:
+  # Configure base path for serving UI at /temporal-web
+  additionalEnv:
+    - name: TEMPORAL_UI_PUBLIC_PATH
+      value: /temporal-web
+    - name: TEMPORAL_ADDRESS
+      value: temporaltest-frontend:7233

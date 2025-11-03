@@ -1,0 +1,8 @@
+[project]
+name = "prefect-k8s-flow"
+version = "0.1.0"
+description = "Prefect ETL flow for Kubernetes deployment"
+requires-python = ">=3.11"
+dependencies = [
+    "prefect>=3.4.25",
+]

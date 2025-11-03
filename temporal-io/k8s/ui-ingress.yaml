@@ -1,0 +1,71 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: temporal-frontend-strip-prefix
+  namespace: temporal
+spec:
+  stripPrefix:
+    prefixes:
+      - /temporal-frontend
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: temporal-web-strip-prefix
+  namespace: temporal
+spec:
+  stripPrefix:
+    prefixes:
+      - /temporal-web
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: temporal-frontend-subpath
+  namespace: temporal
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - match: PathPrefix(`/temporal-frontend`)
+      kind: Rule
+      middlewares:
+        - name: temporal-frontend-strip-prefix
+      services:
+        - name: temporaltest-frontend
+          port: 7243
+          passHostHeader: true
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: temporal-web-subpath
+  namespace: temporal
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - match: PathPrefix(`/temporal-web`)
+      kind: Rule
+      middlewares:
+        - name: temporal-web-strip-prefix
+      services:
+        - name: temporaltest-web
+          port: 8080
+          passHostHeader: true
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: temporal-grpc
+  namespace: temporal
+spec:
+  entryPoints:
+    - temporal-grpc
+  routes:
+    - match: HostSNI(`*`)
+      services:
+        - name: temporaltest-frontend
+          port: 7233

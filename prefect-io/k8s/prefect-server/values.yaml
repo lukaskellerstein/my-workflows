@@ -1,0 +1,22 @@
+# --- keep your existing content above ---
+
+server:
+  apiBasePath: "/prefect-server/api"
+  uiConfig:
+    # Tell the UI where the API is reachable from the browser
+    prefectUiApiUrl: "http://192.168.5.65:30080/prefect-server/api"
+    prefectUiStaticDirectory: "/ui_build"
+
+  # Add env vars here (NOT server.extraEnv)
+  env:
+    - name: PREFECT_UI_SERVE_BASE
+      value: "/prefect-server"
+    # (Optional, usually not required if same host/port)
+    # - name: PREFECT_UI_URL
+    #   value: "http://192.168.5.65:31666/prefect-server/"
+
+# Top-level service (do not nest under server)
+service:
+  type: ClusterIP
+  port: 4200
+  targetPort: 4200

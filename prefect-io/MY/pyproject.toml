@@ -1,0 +1,20 @@
+[project]
+name = "prefect-examples"
+version = "0.1.0"
+description = "Comprehensive Prefect workflow examples for learning and demonstration"
+requires-python = ">=3.12"
+dependencies = [
+    # Core Prefect
+    "prefect>=3.4.25",
+    # AI/LLM Integration (for 5_AI examples)
+    "openai>=2.6.1",
+    "openai-agents>=0.4.2",
+    # HTTP and async requests
+    "httpx>=0.24.0",
+    "requests>=2.31.0",
+    # Optional: Visualization (for 2_visualization)
+    "graphviz>=0.20.0",
+    # Optional: Web scraping examples
+    "beautifulsoup4>=4.12.0",
+    "python-dotenv>=1.2.1",
+]

@@ -1,0 +1,6 @@
+worker:
+  apiConfig: selfHostedServer
+  config:
+    workPool: MyFirstWorkPool
+  selfHostedServerApiConfig:
+    apiUrl:  http://prefect-server.prefect.svc.cluster.local:4200/prefect-server/api

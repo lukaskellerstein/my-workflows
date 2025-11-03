@@ -1,0 +1,20 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: prefect-redirect-slash
+  namespace: prefect
+spec:
+  redirectRegex:
+    regex: ^/prefect-server$
+    replacement: /prefect-server/
+    permanent: true
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: prefect-strip-prefix
+  namespace: prefect
+spec:
+  stripPrefixRegex:
+    regex:
+      - "^/prefect-server/?"
