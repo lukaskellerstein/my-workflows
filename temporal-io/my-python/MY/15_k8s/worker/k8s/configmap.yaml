@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: temporal-worker-config
+  labels:
+    app: temporal-worker
+data:
+  # Internal cluster address (workers run inside K8s)
+  TEMPORAL_HOST: "temporaltest-frontend.temporal.svc.cluster.local:7233"
+  TASK_QUEUE: "k8s-multiple-nodes-task-queue"
+  TEMPORAL_NAMESPACE: "default"

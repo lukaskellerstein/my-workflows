@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: temporal-worker
+  labels:
+    app: temporal-worker
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: temporal-worker
+
+  template:
+    metadata:
+      labels:
+        app: temporal-worker
+
+    spec:
+      containers:
+      - name: worker
+        # Update this with your Docker Hub username and image
+        image: lukaskellerstein/my-first-temporal-worker:latest
+        imagePullPolicy: Always
+
+        envFrom:
+        - configMapRef:
+            name: temporal-worker-config
+
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+
+        livenessProbe:
+          exec:
+            command:
+            - python
+            - -c
+            - "import sys; sys.exit(0)"
+          initialDelaySeconds: 30
+          periodSeconds: 10
+
+        readinessProbe:
+          exec:
+            command:
+            - python
+            - -c
+            - "import sys; sys.exit(0)"
+          initialDelaySeconds: 10
+          periodSeconds: 5
+
+      terminationGracePeriodSeconds: 30
+
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        fsGroup: 1000

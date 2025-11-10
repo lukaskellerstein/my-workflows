@@ -1,0 +1,17 @@
+[project]
+name = "2-complex-ai"
+version = "0.1.0"
+description = "Complex AI workflows with LLM, agents, tools, and Slack integration"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "temporalio[openai-agents]>=1.18.2",
+    "python-dotenv>=1.2.1",
+    "openai>=1.107.1,<2",
+    "openai-agents>=0.3,<0.4",
+    "slack-sdk>=3.37.0",
+    "fastapi>=0.120.3",
+    "aiohttp>=3.13.2",
+    "uvicorn[standard]>=0.34.0",
+    "websockets>=14.1",
+]

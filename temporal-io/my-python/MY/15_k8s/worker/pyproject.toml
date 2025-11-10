@@ -1,0 +1,8 @@
+[project]
+name = "temporal-worker"
+version = "0.1.0"
+description = "Temporal workflow worker for Kubernetes"
+requires-python = ">=3.11"
+dependencies = [
+    "temporalio>=1.0.0",
+]

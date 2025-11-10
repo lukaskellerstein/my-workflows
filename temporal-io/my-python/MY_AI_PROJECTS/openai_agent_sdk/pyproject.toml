@@ -1,0 +1,15 @@
+[project]
+name = "openai-agent-sdk-temporal"
+version = "0.1.0"
+description = "OpenAI Agent SDK + Temporal.io Integration Projects"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "temporalio[openai-agents]>=1.18.2",
+    "openai-agents>=0.3,<0.4",
+    "fastapi>=0.115.0",
+    "uvicorn>=0.32.0",
+    "pymongo>=4.10.0",
+    "python-dotenv>=1.0.0",
+    "requests>=2.32.0",
+]

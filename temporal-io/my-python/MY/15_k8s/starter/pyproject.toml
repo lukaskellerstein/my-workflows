@@ -1,0 +1,8 @@
+[project]
+name = "temporal-starter"
+version = "0.1.0"
+description = "Temporal workflow starter client"
+requires-python = ">=3.11"
+dependencies = [
+    "temporalio>=1.0.0",
+]

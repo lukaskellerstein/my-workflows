@@ -1,0 +1,51 @@
+version: "3.9"
+
+services:
+  minio:
+    image: quay.io/minio/minio:latest
+    container_name: minio
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: admin
+      MINIO_ROOT_PASSWORD: password123
+    ports:
+      - "9000:9000"   # S3 API
+      - "9001:9001"   # Web console
+    volumes:
+      - minio_data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/ready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  aistor-mcp:
+    image: quay.io/minio/aistor/mcp-server-aistor:latest
+    container_name: aistor-mcp
+    depends_on:
+      minio:
+        condition: service_healthy
+    environment:
+      # Point MCP to the MinIO service in this compose network
+      MINIO_ENDPOINT: minio:9000
+      MINIO_ACCESS_KEY: admin
+      MINIO_SECRET_KEY: password123
+      MINIO_USE_SSL: "false"      # because we're using HTTP to MinIO
+    command:
+      [
+        "--allowed-directories", "/Downloads",
+        "--allow-admin",
+        "--allow-delete",
+        "--allow-write",
+        "--http",
+        "--http-port", "8090"
+      ]
+    ports:
+      - "8090:8090"   # MCP StreamableHTTP endpoint at /mcp
+    volumes:
+      - ${HOME}/Temp/Minio:/Downloads
+    # if you're on Windows, replace ${HOME} with an absolute path like C:\Users\you\Downloads
+    # and ensure Docker Desktop file sharing is enabled for that path.
+
+volumes:
+  minio_data:

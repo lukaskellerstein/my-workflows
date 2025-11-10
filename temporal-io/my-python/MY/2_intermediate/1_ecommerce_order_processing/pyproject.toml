@@ -1,0 +1,16 @@
+[project]
+name = "ecommerce-order-processing"
+version = "0.1.0"
+description = "E-commerce order processing with Temporal Signals and Queries"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "temporalio>=1.6.0",
+    "fastapi>=0.115.0",
+    "uvicorn>=0.32.0",
+    "pydantic>=2.9.0",
+    "httpx>=0.27.0",
+]
+
+[tool.uv]
+dev-dependencies = []

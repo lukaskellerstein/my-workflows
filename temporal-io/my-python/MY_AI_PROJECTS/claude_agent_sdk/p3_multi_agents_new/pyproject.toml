@@ -1,0 +1,26 @@
+[project]
+name = "p3-multi-agents-code-review"
+version = "0.1.0"
+description = "Code Review Pipeline with Multi-Agent Teams using Claude Agent SDK and Temporal.io"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "temporalio>=1.6.0",
+    "claude-agent-sdk>=0.1.0",
+    "anthropic>=0.39.0",
+    "pydantic>=2.9.0",
+    "python-dotenv>=1.0.0",
+    "httpx>=0.27.0",
+    "pymongo>=4.10.0",
+    "beautifulsoup4>=4.12.0",
+    "markdown>=3.7.0",
+    "pillow>=10.4.0",
+    "pytest>=8.3.0",
+    "pytest-asyncio>=0.24.0",
+    "opentelemetry-api>=1.27.0",
+    "opentelemetry-sdk>=1.27.0",
+    "anyio>=4.0.0",
+    "minio>=7.2.18",
+    "slack-sdk>=3.27.0",
+    "aiohttp>=3.9.0",
+]
