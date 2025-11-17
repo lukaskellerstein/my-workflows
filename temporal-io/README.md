@@ -1,5 +1,5 @@
 Add directory:
 
 ```
-/home/lukas/Projects/Github/PrefectHQ
+/home/lukas/Projects/Github/temporalio
 ```
