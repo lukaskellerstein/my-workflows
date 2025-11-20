@@ -1,6 +1,6 @@
 # Temporal - K8s
 
-## 0. Create a `prefect` k8s namespace
+## 0. Create a `temporal` k8s namespace
 
 Create namespace
 
@@ -30,6 +30,7 @@ kubectl apply -f ui-ingress.yaml
 ### Configure Traefik TCP entrypoint for gRPC (port 7233)
 
 The gRPC endpoint is exposed via Traefik TCP routing. The configuration has been added to:
+
 - `/home/lukas/Projects/Github/lukaskellerstein/my-workflows/k8s-global/traefik/values.yaml`
 
 The TCP entrypoint `temporal-grpc` routes traffic to the Temporal frontend service on port 7233.
@@ -88,6 +89,7 @@ After deployment, access Temporal services at:
 - **gRPC (via Traefik)**: `192.168.5.65:30733`
 
 To verify the ports:
+
 ```bash
 kubectl get svc -n traefik traefik -o jsonpath='{range .spec.ports[*]}{.name}{": "}{.nodePort}{"\n"}{end}'
 ```
